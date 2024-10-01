@@ -1,0 +1,95 @@
+service: quiz
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  environment:
+    JWT_SECRET: mySecretKey
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource:
+            - arn:aws:dynamodb:${self:provider.region}:*:table/quizUsersDb
+            - arn:aws:dynamodb:${self:provider.region}:*:table/quizUsersDb/index/UsernameIndex
+            - arn:aws:dynamodb:${self:provider.region}:*:table/quizDB # Added permission for quizDB table
+
+functions:
+  functions:
+  getAllUsers:
+    handler: functions/admin/getAllUsers/index.handler # Adjust the path as needed
+    events:
+      - http:
+          path: users
+          method: get
+          #cors: true
+          #authorizer: tokenCheck  # Include if you're using authorization
+
+  getAllQuiz:
+    handler: functions/admin/getAllQuiz/index.handler # Update with the correct path to your getAllQuiz file
+    events:
+      - http:
+          path: quizzes
+          method: get
+          #cors: true # Enable CORS if necessary
+          #authorizer: tokenCheck # If you have an authorizer, otherwise remove this line
+  signup:
+    handler: functions/user/signup.handler
+    events:
+      - http:
+          path: signup
+          method: post
+  login:
+    handler: functions/user/login.handler
+    events:
+      - http:
+          path: login
+          method: post
+  postQuiz:
+    handler: functions/postQuiz.handler
+    events:
+      - http:
+          path: quiz
+          method: post
+
+resources:
+  Resources:
+    quizUsersDb:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: quizUsersDb
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: username
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UsernameIndex
+            KeySchema:
+              - AttributeName: username
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
+
+    quizDB: # Added this for quizzes
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: quizDB
+        AttributeDefinitions:
+          - AttributeName: quizId
+            AttributeType: S # Define the attribute for quizId
+        KeySchema:
+          - AttributeName: quizId
+            KeyType: HASH # Partition key
+        BillingMode: PAY_PER_REQUEST
