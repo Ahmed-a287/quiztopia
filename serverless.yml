@@ -29,17 +29,14 @@ functions:
       - http:
           path: users
           method: get
-          #cors: true
-          #authorizer: tokenCheck  # Include if you're using authorization
 
   getAllQuiz:
-    handler: functions/admin/getAllQuiz/index.handler # Update with the correct path to your getAllQuiz file
+    handler: functions/admin/getAllQuiz/index.handler
     events:
       - http:
           path: quizzes
           method: get
-          #cors: true # Enable CORS if necessary
-          #authorizer: tokenCheck # If you have an authorizer, otherwise remove this line
+
   signup:
     handler: functions/user/signup.handler
     events:
