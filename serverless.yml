@@ -16,15 +16,18 @@ provider:
             - dynamodb:Scan
             - dynamodb:GetItem
             - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            - dynamodb:UpdateItem
           Resource:
             - arn:aws:dynamodb:${self:provider.region}:*:table/quizUsersDb
             - arn:aws:dynamodb:${self:provider.region}:*:table/quizUsersDb/index/UsernameIndex
-            - arn:aws:dynamodb:${self:provider.region}:*:table/quizDB # Added permission for quizDB table
+            - arn:aws:dynamodb:${self:provider.region}:*:table/quizDB
+            - arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/quizDB
 
 functions:
   functions:
   getAllUsers:
-    handler: functions/admin/getAllUsers/index.handler # Adjust the path as needed
+    handler: functions/admin/getAllUsers/index.handler
     events:
       - http:
           path: users
@@ -55,6 +58,25 @@ functions:
       - http:
           path: quiz
           method: post
+  deleteQuiz:
+    handler: functions/deleteQuiz/index.handler
+    events:
+      - httpApi:
+          path: /quiz/{quizId}
+          method: DELETE
+  postQuestion:
+    handler: functions/postQuestion/index.handler
+    events:
+      - httpApi:
+          path: /quiz/{quizId}
+          method: POST
+  getQuiz:
+    handler: functions/getQuiz/index.handler
+    events:
+      - httpApi:
+          path: /quiz/{quizId}
+          method: GET
+######################################################
 
 resources:
   Resources:
@@ -79,14 +101,14 @@ resources:
               ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
 
-    quizDB: # Added this for quizzes
+    quizDB:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: quizDB
         AttributeDefinitions:
           - AttributeName: quizId
-            AttributeType: S # Define the attribute for quizId
+            AttributeType: S
         KeySchema:
           - AttributeName: quizId
-            KeyType: HASH # Partition key
+            KeyType: HASH
         BillingMode: PAY_PER_REQUEST

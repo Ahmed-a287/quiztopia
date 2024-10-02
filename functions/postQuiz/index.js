@@ -12,8 +12,11 @@ async function postQuiz(event) {
   // Check if userId is attached to the event by the token middleware
   const userId = event.userId; // Assuming tokenCheck middleware sets event.userId
 
-  if (!userId) {
-    return sendError(400, { success: false, message: 'User ID is required.' });
+  if (!userId || !quizName) {
+    return sendError(400, {
+      success: false,
+      message: !userId ? 'User ID is required.' : 'Quiz name is required.',
+    });
   }
 
   try {
