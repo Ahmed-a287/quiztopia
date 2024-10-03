@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "62f64a0f-60d5-456e-8b0d-080073360f7d",
+		"name": "QUIZ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34339430"
+	},
+	"item": [
+		{
+			"name": "https://0sa64yvbvf.execute-api.eu-north-1.amazonaws.com/dev/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"User ex\",\r\n  \"password\": \"password ex\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bayp68e507.execute-api.eu-north-1.amazonaws.com/dev/signup",
+					"protocol": "https",
+					"host": [
+						"bayp68e507",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://0sa64yvbvf.execute-api.eu-north-1.amazonaws.com/dev/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"User ex\",\r\n  \"password\": \"password ex\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bayp68e507.execute-api.eu-north-1.amazonaws.com/dev/login",
+					"protocol": "https",
+					"host": [
+						"bayp68e507",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://0sa64yvbvf.execute-api.eu-north-1.amazonaws.com/dev/quiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjFjZGYzOC1hODQzLTRlMmEtOWYxNS1lYmI4NzNiYjk3MGYiLCJpYXQiOjE3Mjc4MDYzMDksImV4cCI6MTcyNzgwOTkwOX0.y6I30TqC8GHszcNB9_Q3bL8iEWe9GAav8dZ6FoOecFk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"quizName\": \"Quiz Name\",\r\n  \"userId\": \"User id\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "bayp68e507.execute-api.eu-north-1.amazonaws.com/dev/quiz",
+					"host": [
+						"bayp68e507",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://0sa64yvbvf.execute-api.eu-north-1.amazonaws.com/dev/quizzes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bayp68e507.execute-api.eu-north-1.amazonaws.com/dev/quizzes",
+					"protocol": "https",
+					"host": [
+						"bayp68e507",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"quizzes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://0sa64yvbvf.execute-api.eu-north-1.amazonaws.com/dev/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bayp68e507.execute-api.eu-north-1.amazonaws.com/dev/users",
+					"protocol": "https",
+					"host": [
+						"bayp68e507",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://e81bezqcec.execute-api.eu-north-1.amazonaws.com/quiz/{quiz id}",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://x34ewa9xm9.execute-api.eu-north-1.amazonaws.com/quiz/{ quizId }",
+					"protocol": "https",
+					"host": [
+						"x34ewa9xm9",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"{ quizId }"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://e81bezqcec.execute-api.eu-north-1.amazonaws.com/quiz/{quiz id}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"question\": \"Your question here?\",\r\n  \"answer\": \"Correct answer here\",\r\n  \"longitude\": \"your-longitude-value\",\r\n  \"latitude\": \"your-latitude-value\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://x34ewa9xm9.execute-api.eu-north-1.amazonaws.com/quiz/{quizId}",
+					"protocol": "https",
+					"host": [
+						"x34ewa9xm9",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"{quizId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - https://e81bezqcec.execute-api.eu-north-1.amazonaws.com/quiz/{quizId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://x34ewa9xm9.execute-api.eu-north-1.amazonaws.com/quiz/{quizId}",
+					"protocol": "https",
+					"host": [
+						"x34ewa9xm9",
+						"execute-api",
+						"eu-north-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"quiz",
+						"{quizId}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
